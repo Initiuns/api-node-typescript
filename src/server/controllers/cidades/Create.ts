@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { StatusCodes } from 'http-status-codes'
 
 import * as yup from 'yup'
 import { validation } from '../../shared/middleware/Validation'
@@ -30,5 +31,6 @@ export const createValidation = validation((getSchema) => ({
 export const create = async (req: Request<{}, {}, ICidade>, res: Response) => {
   console.log(`Nome: ${req.body.nome}`)
   console.log(`Estado: ${req.body.estado}`)
-  return res.send('Create!')
+  
+  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Não implementado!')
 }
