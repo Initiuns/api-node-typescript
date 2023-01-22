@@ -7,9 +7,15 @@ const startServer = () => {
 
 
 if(process.env.IS_LOCALHOST !== 'true') {
-  Knex.migrate.latest().then(() => {
-    startServer()
-  })
+  console.log('Rodando migrations')
+
+  Knex.migrate
+    .latest()
+    .then(() => {
+      Knex.seed.run()
+        .then(() => startServer())
+        .catch(console.log)
+    })
     .catch(console.log)
 }
 else {
